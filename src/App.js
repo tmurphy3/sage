@@ -14,11 +14,13 @@ function App() {
   }, [waterLevel]);
 
   const handleFill = () => {
-    if (filling || waterLevel === 5) return; // exit if bathtub is full or already being filled
+    if (filling) return; // exit if bathtub is already being filled
+
     // cancels any ongoing draining
     setDraining(false);
     clearExistingTimeouts();
 
+    if (waterLevel === 5) return; // exit if bathtub is already full
     setFilling(true);
 
     // will increment {waterLevel} every 2 seconds until {waterLevel} === 5
@@ -32,10 +34,13 @@ function App() {
   };
 
   const handleDrain = () => {
-    if (draining || waterLevel === 0) return; // exit if bathtub is empty or already being drained
+    if (draining) return; // exit if bathtub is already being drained
+
     // cancels any ongoing filling
     setFilling(false);
     clearExistingTimeouts();
+
+    if (waterLevel === 0) return; // exit if bathtub is already empty
 
     setDraining(true);
 
