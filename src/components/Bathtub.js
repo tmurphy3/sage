@@ -1,12 +1,12 @@
 import React from "react";
 import "../styles/Bathtub.css";
 
-function Bathtub() {
+function Bathtub({ waterLevel }) {
   return (
     <div className="Bathtub">
       <div className="Fouset" />
       <div className="WaterContainer">
-        {Array(5)
+        {Array(waterLevel)
           .fill()
           .map((el, i) => (
             <div key={i} className="Water"></div>
