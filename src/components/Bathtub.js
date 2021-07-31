@@ -1,10 +1,15 @@
 import React from "react";
 import "../styles/Bathtub.css";
 
-function Bathtub({ waterLevel }) {
+function Bathtub({ waterLevel, filling }) {
   return (
     <div className="Bathtub">
-      <div className="Fouset" />
+      <div
+        className="Fouset"
+        style={{
+          backgroundColor: filling ? "rgb(46, 179, 255)" : "white",
+        }}
+      />
       <div className="WaterContainer">
         {Array(waterLevel)
           .fill()
