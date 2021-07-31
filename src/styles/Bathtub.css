@@ -1,0 +1,32 @@
+.Bathtub {
+  margin-top: 40px;
+  width: 80vw;
+  height: 47vw;
+  background-image: url("../assets/bathtub.jpg");
+  background-size: cover;
+}
+.Fouset {
+  margin-top: 10.5vw;
+  margin-left: 18vw;
+  width: 2vw;
+  height: 6vw;
+  border-radius: 30px;
+  background-color: rgb(46, 179, 255);
+}
+.WaterContainer {
+  margin-top: 5.5vw;
+  margin-left: 13vw;
+  width: 54vw;
+  height: 16vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+.Water {
+  width: 99%;
+  height: 18%;
+  background-color: rgb(46, 179, 255);
+  border-radius: 4px;
+  margin: 1px 0px;
+}

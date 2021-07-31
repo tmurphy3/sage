@@ -1,4 +1,5 @@
 import "./styles/App.css";
+import Bathtub from "./components/Bathtub";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
           <button onClick={() => console.log("Drain")}>Drain</button>
         </div>
       </div>
+      <Bathtub />
     </div>
   );
 }
