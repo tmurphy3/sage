@@ -3,22 +3,25 @@ import Bathtub from "./components/Bathtub";
 import "./styles/App.css";
 
 function App() {
-  const [waterLevel, setWaterLevel] = useState(0);
-  const [filling, setFilling] = useState(false);
-  const [draining, setDraining] = useState(false);
+  const [waterLevel, setWaterLevel] = useState(0); // current level of water
+  const [filling, setFilling] = useState(false); // is the bathtub currently filling
+  const [draining, setDraining] = useState(false); // is the bathtub currently draining
 
+  // every time {waterLevel} changes, check if the bathtub is full or empty
   useEffect(() => {
     if (waterLevel === 5) setFilling(false);
     if (waterLevel === 0) setDraining(false);
   }, [waterLevel]);
 
   const handleFill = () => {
+    if (filling || waterLevel === 5) return; // exit if bathtub is full or already being filled
+    // cancels any ongoing draining
     setDraining(false);
-    if (filling || waterLevel === 5) return;
     clearExistingTimeouts();
 
     setFilling(true);
 
+    // will increment {waterLevel} every 2 seconds until {waterLevel} === 5
     let ct = 1;
     for (let i = waterLevel; i < 5; i++) {
       setTimeout(() => {
@@ -29,11 +32,14 @@ function App() {
   };
 
   const handleDrain = () => {
+    if (draining || waterLevel === 0) return; // exit if bathtub is empty or already being drained
+    // cancels any ongoing filling
     setFilling(false);
-    if (draining || waterLevel === 0) return;
     clearExistingTimeouts();
+
     setDraining(true);
 
+    // will decrement {waterLevel} every 2 seconds until {waterLevel} === 0
     let ct = 1;
     for (let i = waterLevel; i > 0; i--) {
       setTimeout(() => {
@@ -43,6 +49,7 @@ function App() {
     return;
   };
 
+  // clears all existing timeouts
   const clearExistingTimeouts = () => {
     let id = window.setTimeout(() => {}, 0);
     while (id--) {

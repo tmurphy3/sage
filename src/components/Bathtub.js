@@ -2,6 +2,9 @@ import React from "react";
 import "../styles/Bathtub.css";
 
 function Bathtub({ waterLevel, filling }) {
+  // "Fouset" is a blue div that appears under the fouset when bathtub is being filled
+  // "WaterContainer" renders {waterLevel} amount of "Water" divs
+
   return (
     <div className="Bathtub">
       <div
