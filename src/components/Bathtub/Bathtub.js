@@ -13,12 +13,13 @@ function Bathtub() {
   function handleStartMovement(movementType) {
     if (waterMovement === movementType) return; // exit if already filling/draining
 
+    // exit if bathtub is already at max or min
     if (
       (movementType === "Filling" && waterLevelRef.current === 5) ||
       (movementType === "Draining" && waterLevelRef.current === 0)
     ) {
       setWaterMovement(null);
-      return handleStopMovement();
+      return;
     }
 
     handleStopMovement(); // clears any ongoing intervals so only one is going at any given time
@@ -37,7 +38,7 @@ function Bathtub() {
         (movementType === "Draining" && waterLevelRef.current === 0)
       ) {
         setWaterMovement(null);
-        return clearInterval(intervalRef.current);
+        return handleStopMovement();
       }
     }, 2000);
 
