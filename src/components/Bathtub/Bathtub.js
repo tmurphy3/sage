@@ -10,13 +10,26 @@ function Bathtub() {
   const waterLevelRef = useRef(0);
 
   // when fill or drain buttons are clicked, movementType will be Filling or Draining
-  function handleMoveWater(movementType) {
+  function handleStartMovement(movementType) {
     if (waterMovement === movementType) return; // exit if already filling/draining
 
-    handleStopWater(); // clears any ongoing intervals so only one is going at any given time
+    if (
+      (movementType === "Filling" && waterLevelRef.current === 5) ||
+      (movementType === "Draining" && waterLevelRef.current === 0)
+    ) {
+      setWaterMovement(null);
+      return handleStopMovement();
+    }
+
+    handleStopMovement(); // clears any ongoing intervals so only one is going at any given time
     setWaterMovement(movementType);
 
     const id = setInterval(() => {
+      // change waterLevelRef accordingly, and setWaterLevel state
+      if (movementType === "Filling") waterLevelRef.current++;
+      if (movementType === "Draining") waterLevelRef.current--;
+      setWaterLevel(waterLevelRef.current);
+
       // clear interval if we are filling and reach max level
       // clear interval if we are draining and reach min level
       if (
@@ -26,11 +39,6 @@ function Bathtub() {
         setWaterMovement(null);
         return clearInterval(intervalRef.current);
       }
-
-      // change waterLevelRef accordingly, and setWaterLevel state
-      if (movementType === "Filling") waterLevelRef.current++;
-      if (movementType === "Draining") waterLevelRef.current--;
-      setWaterLevel(waterLevelRef.current);
     }, 1000);
 
     intervalRef.current = id;
@@ -39,7 +47,7 @@ function Bathtub() {
   }
 
   // helper function to clear interval
-  function handleStopWater() {
+  function handleStopMovement() {
     return clearInterval(intervalRef.current);
   }
 
@@ -52,7 +60,7 @@ function Bathtub() {
         <h2>Water Level: {waterLevel * 20}px</h2>
         <div className="Bathtub__headerButtons">
           <button
-            onClick={() => handleMoveWater("Filling")}
+            onClick={() => handleStartMovement("Filling")}
             style={{
               backgroundColor: waterMovement === "Filling" ? "grey" : "white",
             }}
@@ -60,7 +68,7 @@ function Bathtub() {
             Fill
           </button>
           <button
-            onClick={() => handleMoveWater("Draining")}
+            onClick={() => handleStartMovement("Draining")}
             style={{
               backgroundColor: waterMovement === "Draining" ? "grey" : "white",
             }}
@@ -72,7 +80,7 @@ function Bathtub() {
               backgroundColor: "white",
             }}
             onClick={() => {
-              handleStopWater();
+              handleStopMovement();
               setWaterMovement(null);
             }}
           >
