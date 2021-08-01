@@ -19,7 +19,7 @@ function Bathtub() {
       (movementType === "Draining" && waterLevelRef.current === 0)
     ) {
       setWaterMovement(null);
-      return;
+      return handleStopMovement();
     }
 
     handleStopMovement(); // clears any ongoing intervals so only one is going at any given time
