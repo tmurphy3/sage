@@ -39,7 +39,7 @@ function Bathtub() {
         setWaterMovement(null);
         return clearInterval(intervalRef.current);
       }
-    }, 1000);
+    }, 2000);
 
     intervalRef.current = id;
 
