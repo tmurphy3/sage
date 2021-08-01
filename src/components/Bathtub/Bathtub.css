@@ -1,8 +1,30 @@
+.Bathtub__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.Bathtub__header {
+  width: 100%;
+  background-color: rgb(201, 211, 211);
+  display: flex;
+  justify-content: space-around;
+}
+.Bathtub__headerButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.Bathtub__headerButtons > button {
+  width: 15vw;
+  margin: 10px;
+  border: none;
+}
 .Bathtub {
   margin-top: 40px;
   width: 80vw;
   height: 47vw;
-  background-image: url("../assets/bathtub.jpg");
+  background-image: url("./bathtub.jpg");
   background-size: cover;
 }
 .Fouset {
